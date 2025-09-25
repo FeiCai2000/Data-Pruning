@@ -215,8 +215,7 @@ def run(args):
     current_acc = 0
     max_acc = 0
     
-    # indices = read_json_file('./outputs/20250901/static/exp/suggorate/2025-09-01 15:47:55/cifar10_resnet18_epoch200_lr0.1_bs128_pr0_nr0_'+ str(args.epoch_end) +'_correlation_1_list.json')
-    indices = read_json_file('./outputs/20250901/static/exp/suggorate/2025-09-01 20:30:38/cifar100_resnet18_epoch200_lr0.1_bs128_pr0_nr0_'+ str(args.epoch_end) +'_correlation_1_list.json')
+    indices = read_json_file(args.input_correlation_file)
     # print("Start:",indices)
     max_m_indices = np.argsort(indices)[-round(((1-args.pr)*len(train_dataset))):]
     filtered_train_dataset = torch.utils.data.Subset(train_dataset, max_m_indices) 
@@ -247,6 +246,7 @@ if __name__ == '__main__':
     parse.add_argument('--ws', default=10, type=int, help='window_size')   
     parse.add_argument('--device', default=0, type=str, help='GPU device')
     parse.add_argument('--input_path', default='/home/caifei/Project/Datasets/',type=str, help='the path of the dataset')
+    parse.add_argument('--input_correlation_file', default='./outputs/suggorate/',type=str, help='the path of the correlation scores')
     # parse.add_argument('--output_path', default='./outputs/retraining/', type=str, help='the path of the result in this expriment')
     parse.add_argument('--output_path', default='./outputs/retraining/' + formatted_date + '/', type=str, help='the path of the result in this expriment')
     args = parse.parse_args()
