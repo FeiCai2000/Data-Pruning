@@ -58,7 +58,6 @@ def load_dataset(args):
             transforms.Normalize((0.4802, 0.4481, 0.3975), (0.2770, 0.2691, 0.2821)),
         ])
     elif args.dataset == 'imagenet':
-        # 数据预处理
         transform_train = transforms.Compose([
             transforms.RandomResizedCrop(224),
             transforms.RandomHorizontalFlip(),
@@ -334,3 +333,4 @@ if __name__ == '__main__':
     args = parse.parse_args()
 
     run(args)
+
